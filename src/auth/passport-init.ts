@@ -45,16 +45,16 @@ passport.use(
 
       const user:
         | {
-            id: number;
-            displayName: string | null;
-            googleId: string | null;
-            email: string | null;
-            jwt: string | null;
-          }[]
+          id: number;
+          displayName: string | null;
+          googleId: string | null;
+          email: string | null;
+          jwt: string | null;
+        }[]
         | null = await db
-        .select()
-        .from(userTable)
-        .where(eq(userTable.googleId, googleId));
+          .select()
+          .from(userTable)
+          .where(eq(userTable.googleId, googleId));
 
       if (!user) {
         const token: string = jwt.sign({ googleId }, process.env.JWT_SECRET!);
@@ -69,3 +69,4 @@ passport.use(
     },
   ),
 );
+//MISS KO NA SYA
