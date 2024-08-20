@@ -13,3 +13,5 @@ const turso: Client = createClient({
 } as { url: string; authToken?: string });
 
 export const db: LibSQLDatabase<typeof schema> = drizzle(turso);
+//kantutan
+//inamo simon AHAHAHAH

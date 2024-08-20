@@ -7,3 +7,4 @@ export const userTable = sqliteTable("users", {
   email: text("email"),
   jwt: text("jwt"),
 });
+//pepe
