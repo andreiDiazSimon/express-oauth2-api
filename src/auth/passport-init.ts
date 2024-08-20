@@ -15,16 +15,37 @@ import { eq } from "drizzle-orm";
 
 const googleStrategy: typeof Strategy = oAuth.Strategy;
 
+passport.serializeUser(
+  (user: Express.User, done: (err: any, user: Express.User) => any): any =>
+    done(null, user),
+);
+passport.deserializeUser(
+  async (
+    id: unknown,
+    done: (err: any, user: Express.User) => any,
+  ): Promise<any> => {
+    const user:
+      | {
+          id: number;
+          displayName: string | null;
+          googleId: string | null;
+          email: string | null;
+          jwt: string | null;
+        }[]
+      | null = await db
+      .select()
+      .from(userTable)
+      .where(eq(userTable.googleId, id as string));
+    done(null, user);
+  },
+);
+
 passport.use(
   new googleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       callbackURL: "/auth/google/callback",
-    } as {
-      clientID: string;
-      clientSecret: string;
-      callbackURL?: string | undefined;
     },
     async (
       accessToken: string,
