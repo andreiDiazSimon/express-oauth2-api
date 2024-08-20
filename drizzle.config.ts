@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 import type { Config } from "drizzle-kit";
 
-dotenv.config({ path: "./.env" });
+dotenv.config({ path: ".env" });
 
 export default {
   schema: "./drizzle/schema.ts",
